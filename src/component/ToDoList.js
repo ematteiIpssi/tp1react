@@ -9,7 +9,7 @@ export default function ToDoList() {
         setInputValue(e.target.value);
     };
 
-    useEffect(() => {
+    useEffect(() => { //initer le localstorage et remplire tache si local storage pas vide
         if (ls.getItem("tasks") !== null)
             setTasks(ls.getItem("tasks").split(','))
     }, [])
@@ -18,17 +18,17 @@ export default function ToDoList() {
         if (inputValue !== '') { // on verifie que ce n'est pas vide
             setTasks([...tasks, inputValue]); //ajout à la suite de la liste
             setInputValue(''); // remet l'input a vide
-            if (ls.getItem("tasks") !== null)
-                ls.setItem("tasks", ls.getItem("tasks") + "," + inputValue)
+            if (ls.getItem("tasks") !== null) //ajouter au local storage
+                ls.setItem("tasks", ls.getItem("tasks") + "," + inputValue) //on met à la chaine
             else
-                ls.setItem("tasks", inputValue)
+                ls.setItem("tasks", inputValue) //première valeur pour initialiser
         }
     };
 
-    const handleRemoveTask = (index) => { //surp
+    const handleRemoveTask = (index) => { //suprimmer
         const newTasks = tasks.filter((_, i) => i !== index);
         setTasks(newTasks);
-        ls.setItem("tasks",newTasks)
+        ls.setItem("tasks",newTasks) //affecter au local storage
     };
 
 
@@ -39,15 +39,15 @@ export default function ToDoList() {
             <input
                 type="text"
                 value={inputValue}
-                onChange={handleInputChange}
+                onChange={handleInputChange} //a chaque changement on met à jour pour récupérer la tache crée par l'utilisateur
             />
-            <button onClick={handleAddTask}>Ajouter</button>
+            <button onClick={handleAddTask}>Ajouter</button> //* Appelle de la fonction pour add
             </div>
             <div className='list'>
                 {tasks.map((task, index) => (
                     <span key={index}>
                         {task}
-                        <button onClick={() => handleRemoveTask(index)}>Supprimer</button>
+                        <button onClick={() => handleRemoveTask(index)}>Supprimer</button>  //* Appelle de la fonction pour suprimmer
                     </span>
                 ))}
             </div>
