@@ -41,13 +41,13 @@ export default function ToDoList() {
                 value={inputValue}
                 onChange={handleInputChange} //a chaque changement on met à jour pour récupérer la tache crée par l'utilisateur
             />
-            <button onClick={handleAddTask}>Ajouter</button> //* Appelle de la fonction pour add
+            <button onClick={handleAddTask}>Ajouter</button> {/* Appelle de la fonction pour add*/}
             </div>
             <div className='list'>
                 {tasks.map((task, index) => (
                     <span key={index}>
                         {task}
-                        <button onClick={() => handleRemoveTask(index)}>Supprimer</button>  //* Appelle de la fonction pour suprimmer
+                        <button onClick={() => handleRemoveTask(index)}>Supprimer</button>  {/* Appelle de la fonction pour suprimmer*/}
                     </span>
                 ))}
             </div>
